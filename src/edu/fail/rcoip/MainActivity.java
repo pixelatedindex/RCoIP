@@ -4,9 +4,12 @@ import com.android.debug.hv.ViewServer;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.Menu;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,11 +42,16 @@ public class MainActivity extends Activity
         //Set screen_x and screen_y
         CalculateProperties();
         
+        //ControlPad dpad = new ControlPad(this, screen_x, screen_y);
+        
         //Set UI Component vales
         SetLayout();
     	
         //Set values for the defined SurfaceViews
         SetSurfaceViews();
+        
+        //Start new activity?
+        //Pass the surface view and text view?
     }
     
     // Get screen dimensions using Android's DisplayManager
@@ -76,18 +84,18 @@ public class MainActivity extends Activity
     public void SetSurfaceViews()
     {
     	RelativeLayout relay = (RelativeLayout) findViewById(R.id.relay);
-    	SurfaceView dpad_l = new SurfaceView(this);
+    	ControlPad dpad_l = new ControlPad(this, screen_x, screen_y);
+    	ControlPad dpad_r = new ControlPad(this, screen_x, screen_y);
     	
     	RelativeLayout.LayoutParams params_l = new RelativeLayout.LayoutParams(sw_width, sw_height);
     	params_l.leftMargin = dpad_l_xo;
     	params_l.topMargin = dpad_l_yo;
     	relay.addView(dpad_l, params_l);
     	
-    	SurfaceView dpad_r = new SurfaceView(this);
     	RelativeLayout.LayoutParams params_r = new RelativeLayout.LayoutParams(sw_width, sw_height);
     	params_r.leftMargin = dpad_r_xo;
     	params_r.topMargin = dpad_r_yo;
-    	relay.addView(dpad_r, params_r);	
+    	relay.addView(dpad_r, params_r);
     }
     
     public void onDestroy()
@@ -153,6 +161,7 @@ public class MainActivity extends Activity
     		}
     			
     	}
-    	return true;
+    	return false;
     }
+    
 }
