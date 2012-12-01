@@ -1,19 +1,38 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relay"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
-    <TextView
-	    android:id="@+id/flight_info"
-	    android:layout_centerHorizontal="true"
-	    android:background="@drawable/bg_shape"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:padding="@dimen/padding_medium"
-	    android:text="@string/flight_info"
-	    tools:context=".MainActivity" />
-  
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
+        <edu.sjsu.cmpe.rcoip.DualJoystickView
+                android:id="@+id/dualjoystickView" android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dip" android:layout_width="fill_parent"
+                android:layout_height="175dip" />
 
-</RelativeLayout>
+        <TableLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dip">
+                <TableRow>
+                        <TextView android:text="@string/string_x"
+                                android:layout_height="wrap_content"></TextView>
+                        <TextView android:text="" android:id="@+id/TextViewX1"
+                                android:layout_width="150dip" android:layout_height="wrap_content"></TextView>
+
+                        <TextView android:text="@string/string_x" android:layout_width="50dip"
+                                android:layout_height="wrap_content"></TextView>
+                        <TextView android:text="" android:id="@+id/TextViewX2"
+                                android:layout_width="100dip" android:layout_height="wrap_content"></TextView>
+                </TableRow>
+                <TableRow>
+                        <TextView android:text="@string/string_y" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"></TextView>
+                        <TextView android:text="" android:id="@+id/TextViewY1"
+                                android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+
+                        <TextView android:text="@string/string_y" android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"></TextView>
+                        <TextView android:text="" android:id="@+id/TextViewY2"
+                                android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+                </TableRow>
+        </TableLayout>
+
+</LinearLayout>
