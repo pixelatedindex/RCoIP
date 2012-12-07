@@ -17,7 +17,7 @@ public class NetworkThread extends Thread
 	private Handler parentHandler;
 	private Handler threadHandler;
 	private DatagramSocket socket;
-	long delay = 16;
+	long delay = 8;
 	private int TIMEOUT = 500;
 	private int PORT_NO = 2000;
 	private String IP_ADDR = "169.254.1.1";

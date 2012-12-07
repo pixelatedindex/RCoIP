@@ -1,3 +1,43 @@
+/**
+		 * Radio Control over Internet Protocol
+		 * Simple Android Transmitter
+		 * 	using UDP and Threads
+		 * 
+		 * (c) 	Amol Mundayoor,
+		 * 		Yoni Klein
+		 * 		Raymond Buckman
+		 * 		Michael Leung
+		 * 	Copyright 2012.
+		 * 
+		 * All contents released under GPL.
+		 * 	This program is free software: you can redistribute it and/or modify
+    		it under the terms of the GNU General Public License as published by
+    		the Free Software Foundation, either version 3 of the License, or
+    		(at your option) any later version.
+
+    		This program is distributed in the hope that it will be useful,
+    		but WITHOUT ANY WARRANTY; without even the implied warranty of
+    		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    		GNU General Public License for more details.
+
+    		You should have received a copy of the GNU General Public License
+    		along with this program.  If not, see <http://www.gnu.org/licenses/>.		
+		 * 
+		 * This application simply sends the positions of the two joysticks in a specific
+		 * format that our receiver can easily parse and obtain the right data for the 
+		 * flight controller. This application would be impossible to write if it were
+		 * not for the miscellaneous open source widgets and tutorials that I have found
+		 * on the internet. Below is a quick listing of all hyperlinks that have been
+		 * invaluable contributions to my knowledge and to this project.
+		 * 
+		 * Most importantly, the Joystick from Mobile Anarcy Widgets - Open Source Widgets:
+		 * 	http://code.google.com/p/mobile-anarchy-widgets/wiki/JoystickView
+		 * The tutorial that helped me understand Threads and Handlers:
+		 * 	http://indyvision.net/2010/02/android-threads-tutorial-part-3/
+		 * Lars Vogel's Android Tutorials:  
+		 * 	http://www.vogella.com/articles/Android/article.html
+		 * 
+*/
 package edu.sjsu.cmpe.rcoip;
 
 import java.net.DatagramPacket;
@@ -15,8 +55,8 @@ public class MainActivity extends Activity implements NetComm
 {
 		//TextViews for debugging purposes
 	
-        //private TextView txtXL, txtYL;
-        //private TextView txtXR, txtYR;
+        private TextView txtXL, txtYL;
+        private TextView txtXR, txtYR;
 	
 		
         private DualJoystickView joystick;
@@ -28,7 +68,7 @@ public class MainActivity extends Activity implements NetComm
         public String LeftTilt; 
         public String RightPan; 
         public String RightTilt;
-    	long delay = 16;
+    	long delay = 8;
         
         @Override
         protected void onCreate(Bundle savedInstanceState) 
@@ -36,10 +76,10 @@ public class MainActivity extends Activity implements NetComm
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_main);
 
-                //txtXL = (TextView)findViewById(R.id.TextViewX1);
-                //txtXR = (TextView)findViewById(R.id.TextViewX2);
-                //txtYL = (TextView)findViewById(R.id.TextViewY1);
-                //txtYR = (TextView)findViewById(R.id.TextViewY2);
+                txtXL = (TextView)findViewById(R.id.TextViewX1);
+                txtXR = (TextView)findViewById(R.id.TextViewX2);
+                txtYL = (TextView)findViewById(R.id.TextViewY1);
+                txtYR = (TextView)findViewById(R.id.TextViewY2);
                 joystick = (DualJoystickView)findViewById(R.id.dualjoystickView);
                 joystick.setOnJostickMovedListener(_listener, listener_);
                 manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -56,8 +96,8 @@ public class MainActivity extends Activity implements NetComm
             		LeftPan = Integer.toHexString(Math.abs(pan+127));
             		LeftTilt = Integer.toHexString(Math.abs(tilt-127));
             		
-                   // txtXL.setText("\t" + Math.abs(pan+127));
-                    //txtYL.setText("\t" + Math.abs(tilt-127));
+                    txtXL.setText("\t" + Math.abs(pan+64));
+                    txtYL.setText("\t" + Math.abs(tilt-64));
                     
                     if (LeftPan.length() == 1)
                     {
@@ -89,8 +129,8 @@ public class MainActivity extends Activity implements NetComm
     			RightPan = Integer.toHexString(Math.abs(pan+127));
         		RightTilt = Integer.toHexString(Math.abs(tilt-127));
         		
-                /*txtXR.setText("\t" + Math.abs(pan+127));
-                txtYR.setText("\t" + Math.abs(tilt-127));*/
+                txtXR.setText("\t" + Math.abs(pan+127));
+                txtYR.setText("\t" + Math.abs(tilt-127));
                 
                 if (RightPan.length() == 1)
                 {
