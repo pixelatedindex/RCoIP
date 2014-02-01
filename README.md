@@ -1,4 +1,4 @@
-RCoIP
+RCoIP (RC over IP)
 =====
 
 ###Overview
